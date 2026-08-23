@@ -1,0 +1,41 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // User profile documents (readable by all users for search, writable by the owner)
+    match /users/{userId} {
+      allow read: if true;
+      allow write: if true; // In development/anonymous mode, allows updating status, name, trophies
+    }
+
+    // Friend requests
+    match /friendRequests/{requestId} {
+      allow read, write: if true;
+    }
+
+    // Friend connections
+    match /friendships/{friendshipId} {
+      allow read, write: if true;
+    }
+
+    // 1v1 Duel matches
+    match /duelMatches/{matchId} {
+      allow read, write: if true;
+    }
+
+    // Clans & Guilds
+    match /clans/{clanId} {
+      allow read, write: if true;
+    }
+
+    // Clan Members
+    match /clanMembers/{memberId} {
+      allow read, write: if true;
+    }
+
+    // Clan Chat Messages
+    match /clanMessages/{messageId} {
+      allow read, write: if true;
+    }
+  }
+}

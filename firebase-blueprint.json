@@ -1,0 +1,121 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Public user profile for online search, match, and friend system",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "friendCode": { "type": "string" },
+        "playerName": { "type": "string" },
+        "avatarId": { "type": "string" },
+        "trophies": { "type": "number" },
+        "level": { "type": "number" },
+        "isOnline": { "type": "boolean" },
+        "lastSeen": { "type": "number" },
+        "updatedAt": { "type": "number" }
+      },
+      "required": ["userId", "friendCode", "playerName", "avatarId", "trophies", "level", "lastSeen"]
+    },
+    "FriendRequest": {
+      "title": "FriendRequest",
+      "description": "Friend request sent from one player to another",
+      "type": "object",
+      "properties": {
+        "fromUserId": { "type": "string" },
+        "fromName": { "type": "string" },
+        "fromAvatarId": { "type": "string" },
+        "fromTrophies": { "type": "number" },
+        "toUserId": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "accepted", "rejected"] },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["fromUserId", "fromName", "fromAvatarId", "toUserId", "status", "createdAt"]
+    },
+    "FriendConnection": {
+      "title": "FriendConnection",
+      "description": "Record of accepted friendship between two players",
+      "type": "object",
+      "properties": {
+        "userA": { "type": "string" },
+        "userB": { "type": "string" },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["userA", "userB", "createdAt"]
+    },
+    "DuelMatch": {
+      "title": "DuelMatch",
+      "description": "1v1 real-time quiz duel match",
+      "type": "object",
+      "properties": {
+        "hostUserId": { "type": "string" },
+        "hostName": { "type": "string" },
+        "hostAvatarId": { "type": "string" },
+        "hostScore": { "type": "number" },
+        "hostCurrentQ": { "type": "number" },
+        "hostFinished": { "type": "boolean" },
+        "guestUserId": { "type": "string" },
+        "guestName": { "type": "string" },
+        "guestAvatarId": { "type": "string" },
+        "guestScore": { "type": "number" },
+        "guestCurrentQ": { "type": "number" },
+        "guestFinished": { "type": "boolean" },
+        "status": { "type": "string", "enum": ["waiting", "playing", "finished", "declined"] },
+        "questionIds": { "type": "array", "items": { "type": "string" } },
+        "winnerId": { "type": "string" },
+        "createdAt": { "type": "number" },
+        "updatedAt": { "type": "number" }
+      },
+      "required": ["hostUserId", "hostName", "status", "questionIds", "createdAt"]
+    },
+    "Clan": {
+      "title": "Clan",
+      "description": "Clan or Guild group with up to 30 members and collective trophies",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "badge": { "type": "string" },
+        "description": { "type": "string" },
+        "minTrophies": { "type": "number" },
+        "leaderId": { "type": "string" },
+        "leaderName": { "type": "string" },
+        "memberCount": { "type": "number" },
+        "totalTrophies": { "type": "number" },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["name", "badge", "minTrophies", "leaderId", "leaderName", "memberCount", "totalTrophies", "createdAt"]
+    },
+    "ClanMember": {
+      "title": "ClanMember",
+      "description": "Member in a clan",
+      "type": "object",
+      "properties": {
+        "clanId": { "type": "string" },
+        "userId": { "type": "string" },
+        "playerName": { "type": "string" },
+        "avatarId": { "type": "string" },
+        "trophies": { "type": "number" },
+        "level": { "type": "number" },
+        "role": { "type": "string", "enum": ["leader", "elder", "member"] },
+        "joinedAt": { "type": "number" }
+      },
+      "required": ["clanId", "userId", "playerName", "avatarId", "trophies", "level", "role", "joinedAt"]
+    },
+    "ClanMessage": {
+      "title": "ClanMessage",
+      "description": "Real-time chat messages inside a clan group",
+      "type": "object",
+      "properties": {
+        "clanId": { "type": "string" },
+        "senderId": { "type": "string" },
+        "senderName": { "type": "string" },
+        "senderAvatarId": { "type": "string" },
+        "senderRole": { "type": "string" },
+        "text": { "type": "string" },
+        "type": { "type": "string", "enum": ["chat", "system"] },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["clanId", "senderId", "senderName", "text", "type", "createdAt"]
+    }
+  }
+}
